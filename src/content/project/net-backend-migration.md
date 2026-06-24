@@ -2,6 +2,7 @@
 title: "Enterprise Backend Migration & Modernization"
 description: "Collaborated with a team to migrate a legacy TypeScript server infrastructure to a scalable .NET and Azure architecture."
 pubDate: Jun 20 2025
+role: "Co-Developer (Student Team)"
 tags:
 - c-sharp
 - dotnet

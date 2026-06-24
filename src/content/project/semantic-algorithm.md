@@ -2,6 +2,7 @@
 title: "Semantic Sliding-Window Algorithm for PDF Annotations"
 description: "Evaluating semantic NLP models against lexical baselines to reliably transfer document annotations across versions"
 pubDate: Jun 12 2026
+role: "Lead Developer (Solo Project)"
 tags:
   - university
   - nlp

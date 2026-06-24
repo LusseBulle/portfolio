@@ -2,6 +2,7 @@
 title: "AI-Driven DevOps Automation (MCP Server)"
 description: "Developed a proof-of-concept Model Context Protocol (MCP) server in Go to integrate AI agents into corporate DevOps workflows."
 pubDate: Dec 20 2025
+role: "Co-Developer (Student Team)"
 tags:
   - go
   - mcp
