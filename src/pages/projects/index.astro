@@ -134,7 +134,7 @@ const sidebarGroups = [
 		<main>
 			<section>
 
-				<Button className="sidebar-button">See tags</Button>
+				<Button className="sidebar-button">Show tags</Button>
 				<Sheet className="sidebar-sheet" position="left">
 					<Sidebar groups={sidebarGroups} />
 				</Sheet>
@@ -171,10 +171,34 @@ const sidebarGroups = [
 </html>
 
 <script>
-    import { modal } from 'webcoreui'
+	import { modal } from 'webcoreui'
 
     modal({
         trigger: '.sidebar-button',
         modal: '.sidebar-sheet'
     })
+
+	function filterProjects() {
+		const selectedTag = window.location.hash.substring(1);
+		const projectCards = document.querySelectorAll<HTMLElement>('.project-card')
+
+		projectCards.forEach(card => {
+			if (!selectedTag) {
+				card.style.display = '';
+				return;
+			}
+
+			const cardTagStr = card.getAttribute('data-tags');
+			const cardTagsArray = cardTagStr ? cardTagStr.split(',') : [];
+
+			if (cardTagsArray.includes(selectedTag)) {
+				card.style.display = '';
+			} else {
+				card.style.display = 'none';
+			}
+		});
+	}
+
+	filterProjects();
+	window.addEventListener('hashchange', filterProjects)
 </script>
