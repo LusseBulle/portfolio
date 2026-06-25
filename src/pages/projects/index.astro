@@ -6,12 +6,23 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { Sidebar, Button, Sheet } from 'webcoreui/astro'
 
 const posts = (await getCollection('project')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+
+const sidebarGroups = [
+	{
+		title: "Tags",
+		items: tags.map(tag => ({
+			name: tag,
+			href: `#${tag}`
+		}))
+	}
+]
 ---
 
 <!doctype html>
@@ -104,6 +115,17 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
 				font-size: 0.8rem;
 				line-height: 1.4;
 			}
+			
+			.sidebar-sheet {
+				width: 10rem;
+				background-color: #fff;
+				text-decoration-color: black;
+				box-shadow: var(--box-shadow);
+			}
+
+			.sidebar-button {
+				outline: auto;
+			}
 
 		</style>
 	</head>
@@ -111,13 +133,11 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
 		<Header />
 		<main>
 			<section>
-				// TODO: Make tags searchable
-				<div class="tag-filters">
-					<button class="filter-btn active" data-tag="all">All</button>
-					{tags.map((tag) => (
-						<button class="filter-btn" data-tag={tag}>{tag}</button>
-					))}
-				</div>
+
+				<Button className="sidebar-button">See tags</Button>
+				<Sheet className="sidebar-sheet" position="left">
+					<Sidebar groups={sidebarGroups} />
+				</Sheet>
 
 				<ul>
 					{
@@ -149,3 +169,12 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
 		<Footer />
 	</body>
 </html>
+
+<script>
+    import { modal } from 'webcoreui'
+
+    modal({
+        trigger: '.sidebar-button',
+        modal: '.sidebar-sheet'
+    })
+</script>
